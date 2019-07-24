@@ -1,13 +1,13 @@
 const db = require('../../data/config');
 
-module.exports.find = function find() {
+module.exports.find = function() {
   return db('users');
 };
 
-module.exports.findWithId = function findWithId(id) {
-  return db('users').where('id', id).first();
+module.exports.findByUsername = function(username) {
+  return db('users').where({ username }).first();
 };
 
-module.exports.create = function create(userObj) {
+module.exports.create = function(userObj) {
   return db('users').insert(userObj);
 };
