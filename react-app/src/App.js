@@ -1,5 +1,8 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
+import Index from './components/Index';
+import Signup from './components/Signup';
+import Signin from './components/Signin';
 import './App.css';
 
 function App() {
@@ -16,6 +19,10 @@ function App() {
           <Link to="/signin/">Login</Link>
         </li>
       </header>
+
+      <Route path="/" exact component={Index} />
+      <Route path="/signup/" component={Signup} />
+      <Route path="/signin/" component={Signin} />
     </div>
   );
 }
