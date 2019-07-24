@@ -27,7 +27,7 @@ router.post('/api/login', async (req, res) => {
   }
 });
 
-router.use('/api/users', usersRouter);
+router.use('/api/users', restricted, usersRouter);
 
 function generateToken(user) {
   const payload = {
@@ -41,6 +41,16 @@ function generateToken(user) {
   };
 
   return jwt.sign(payload, secrets.jwtSecret, options);
+}
+
+function restricted(req, res, next) {
+  try {
+    const token = req.get('Authorization');
+    jwt.verify(token, secrets.jwtSecret);
+    next();
+  } catch (error) {
+    res.status(401).json({ message: 'You shall not pass' });
+  }
 }
 
 module.exports = router;
