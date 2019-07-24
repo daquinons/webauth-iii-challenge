@@ -1,6 +1,9 @@
 const db = require('../../data/config');
 
-module.exports.find = function() {
+module.exports.find = function(department) {
+  if (department) {
+    return db('users').where({ department });
+  }
   return db('users');
 };
 

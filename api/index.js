@@ -46,7 +46,8 @@ function generateToken(user) {
 function restricted(req, res, next) {
   try {
     const token = req.get('Authorization');
-    jwt.verify(token, secrets.jwtSecret);
+    const payload = jwt.verify(token, secrets.jwtSecret);
+    req.user = payload;
     next();
   } catch (error) {
     res.status(401).json({ message: 'You shall not pass' });
