@@ -1,9 +1,13 @@
 const express = require('express');
+const usersRouter = require('./users/router');
 
 const router = express.Router();
 
-router.use('/api', (req, res) => {
+
+router.get('/api', (req, res) => {
   res.json({ message: 'API is up' });
 });
+
+router.use('/api/users', usersRouter);
 
 module.exports = router;
